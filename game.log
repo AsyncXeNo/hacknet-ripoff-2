@@ -1,30 +1,31 @@
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 32 - Initializing storage unit with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 43 - Set name for storage unit with id WLCQI to "".
-2021-07-30 22:21:56 - terminal_game.directory - DEBUG - directory : 54 - Validating contents for directory with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 103 - Validating contents for storage unit with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 50 - Setting contents for storage unit with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 32 - Initializing storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 87 - Validating name for storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.file - DEBUG - file : 38 - Setting name for file with id XQHFQ to "testing.py".
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 103 - Validating contents for storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.file - DEBUG - file : 49 - Validating contents for file with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 50 - Setting contents for storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.directory - DEBUG - directory : 64 - Validating storage unit to add it to directory with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id XQHFQ.
-2021-07-30 22:21:56 - terminal_game.directory - DEBUG - directory : 37 - Added storage unit with id XQHFQ to directory with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 32 - Initializing storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 87 - Validating name for storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 43 - Set name for storage unit with id NUZQZ to "testing".
-2021-07-30 22:21:56 - terminal_game.directory - DEBUG - directory : 54 - Validating contents for directory with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 103 - Validating contents for storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 50 - Setting contents for storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.directory - DEBUG - directory : 64 - Validating storage unit to add it to directory with id WLCQI.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id NUZQZ.
-2021-07-30 22:21:56 - terminal_game.directory - DEBUG - directory : 37 - Added storage unit with id NUZQZ to directory with id WLCQI.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 32 - Initializing storage unit with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 43 - Set name for storage unit with id GXQAQ to "".
+2021-07-30 22:28:52 - terminal_game.directory - DEBUG - directory : 54 - Validating contents for directory with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 103 - Validating contents for storage unit with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 50 - Setting contents for storage unit with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 32 - Initializing storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 87 - Validating name for storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.file - DEBUG - file : 38 - Setting name for file with id SEREP to "testing.py".
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 103 - Validating contents for storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.file - DEBUG - file : 49 - Validating contents for file with id SEREP.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 50 - Setting contents for storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.directory - DEBUG - directory : 64 - Validating storage unit to add it to directory with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id SEREP.
+2021-07-30 22:28:52 - terminal_game.directory - DEBUG - directory : 37 - Added storage unit with id SEREP to directory with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 32 - Initializing storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 87 - Validating name for storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 43 - Set name for storage unit with id HXOOU to "testing".
+2021-07-30 22:28:52 - terminal_game.directory - DEBUG - directory : 54 - Validating contents for directory with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 103 - Validating contents for storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 50 - Setting contents for storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.directory - DEBUG - directory : 64 - Validating storage unit to add it to directory with id GXQAQ.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 110 - Validating parent for storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.storage_unit - DEBUG - storage_unit : 57 - Setting parent for storage unit with id HXOOU.
+2021-07-30 22:28:52 - terminal_game.directory - DEBUG - directory : 37 - Added storage unit with id HXOOU to directory with id GXQAQ.
+sdfsdf
