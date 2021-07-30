@@ -1,3 +1,4 @@
+from utils.id_generator import IdGenerator
 from utils import exceptions
 from utils.my_logging import get_logger
 from terminal_game.storage_unit import StorageUnit
@@ -26,7 +27,7 @@ class File(StorageUnit):
             parent -- parent of the file (must be a Directory).
         """
         
-        super().__init__(name, "", parent)
+        super().__init__(f'FIL-{IdGenerator.generate_id(4)}', name, '', parent)
 
     def set_name(self, name: str):
         """Splits name into filename and extension and stores them."""
@@ -35,7 +36,7 @@ class File(StorageUnit):
         namesplit = name.split('.')
         self.filename = namesplit[0] if len(namesplit) == 1 else '.'.join(namesplit[0:-1])
         self.extension = None if len(namesplit) == 1 else namesplit[-1]
-        logger.debug(f'Setting name for file with id {self.SUID} to "{name}".')
+        logger.debug(f'Setting name for {self.__class__.__name__} with id {self.SUID} to "{name}".')
 
     def get_name(self):
         """returns the name of the file."""
@@ -46,7 +47,7 @@ class File(StorageUnit):
         """Raises appropriate exception if file contents are of invalid type."""
 
         super()._validate_contents(contents)
-        logger.debug(f'Validating contents for file with id {self.SUID}.')
+        logger.debug(f'Validating contents for {self.__class__.__name__} with id {self.SUID}.')
         if isinstance(contents, list):
             raise exceptions.SUInvalidContents('File contents need to be of type str or bytes.')
         
