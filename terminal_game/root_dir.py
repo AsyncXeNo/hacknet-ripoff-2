@@ -25,11 +25,13 @@ class RootDir(Directory):
     def _validate_name(self, name: str):
         """Raises exception if there is a name."""
 
+        logger.debug(f'Validating name for {self.__class__.__name__} with id {self.SUID}')
         if name != "":
             raise exceptions.RootDirException('Cannot assign a name to root directory.')
     
     def _validate_parent(self, parent):
         """Raises exception if there is a parent."""
         
+        logger.debug(f'Validating parent for {self.__class__.__name__} with id {self.SUID}')
         if parent:
             raise exceptions.RootDirException('Cannot assign a parent to root directory.')
