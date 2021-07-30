@@ -35,7 +35,7 @@ class File(StorageUnit):
         namesplit = name.split('.')
         self.filename = namesplit[0] if len(namesplit) == 1 else '.'.join(namesplit[0:-1])
         self.extension = None if len(namesplit) == 1 else namesplit[-1]
-        logger.debug(f'Setting name for file with id {self.SUID} to {name}.')
+        logger.debug(f'Setting name for file with id {self.SUID} to "{name}".')
 
     def get_name(self):
         """returns the name of the file."""

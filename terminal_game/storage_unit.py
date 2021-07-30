@@ -40,7 +40,7 @@ class StorageUnit(object):
 
         self._validate_name(name)
         self.name = name
-        logger.debug(f'Set name for storage unit with id {self.SUID} to {name}.')
+        logger.debug(f'Set name for storage unit with id {self.SUID} to "{name}".')
 
     def set_contents(self, contents):
         """Sets the self.contents attribute to contents."""
@@ -54,7 +54,7 @@ class StorageUnit(object):
 
         self._validate_parent(parent)
         self.parent = parent
-        logger.debug(f'Setting parent for storage unit with id {self.SUID} to {parent.get_name()}.')
+        logger.debug(f'Setting parent for storage unit with id {self.SUID}.')
 
     def get_id(self):
         """Returns the id of the storage unit."""
