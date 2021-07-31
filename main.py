@@ -6,7 +6,8 @@ from terminal_game import internet
 def main():
     web = internet.Internet()
     my_os = web.add_os('asyncxeno', '11111111')
-    logger.info(my_os.main_terminal.name)
+    print(my_os.main_terminal.run_command(['_test', '']))
+
 
 if __name__ == '__main__':
     logger = get_logger(__name__)

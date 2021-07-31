@@ -49,6 +49,16 @@ class OSInvalidPassword(Exception):
             self.info = None
 
 
+class OSInvalidPath(Exception):
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+            self.info = args[1:] if len(args) > 1 else None
+        else:
+            self.message = None
+            self.info = None
+
+
 class OSCorrupted(Exception):
     def __init__(self, *args):
         if args:

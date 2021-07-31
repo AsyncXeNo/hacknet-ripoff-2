@@ -94,7 +94,7 @@ class StorageUnit(object):
         if len(name) > 50:
             raise exceptions.SUNameError('Name is too long.', name)
         for letter in name:    
-            if letter in ['<', '>', ':', '"', '/', '\\', '|', '?', '*']:
+            if letter in ['<', '>', ':', '"', '/', '\\', '|', '?', '*', ' ']:
                 raise exceptions.SUNameError(f'{name} is not a valid name.', name)
 
     def _validate_contents(self, contents):

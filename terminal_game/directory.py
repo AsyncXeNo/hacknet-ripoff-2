@@ -2,6 +2,7 @@ from utils.id_generator import IdGenerator
 from utils import exceptions
 from utils.my_logging import get_logger
 from terminal_game.storage_unit import StorageUnit
+from terminal_game.file import File
 
 
 logger = get_logger(__name__)
@@ -29,6 +30,20 @@ class Directory(StorageUnit):
 
         super().__init__(f'DIR-{IdGenerator.generate_id(4)}', name, contents, parent)
 
+    def bfs(self, depth=0):
+        """Returns the contents of the directory in tree format."""
+
+        bfs = ''
+        for content in self.get_contents():
+            bfs += ('|    '*depth)
+            bfs += '| -- '
+            if isinstance(content, Directory):
+                bfs += f'{content.get_name()}\n'
+                bfs += content.bfs(depth+1)
+            elif isinstance(content, File):
+                bfs += f'{content.get_name()}\n'
+        return bfs
+
     def add(self, storage_unit):
         """Adds an object of type StorageUnit to the contents of the directory."""
         
@@ -40,11 +55,11 @@ class Directory(StorageUnit):
     def delete(self, storage_unit_name):
         """Deleted the storage unit with the given name"""
 
-        unit = self.get_element_by_name(storage_unit_name)
+        unit = self.get_su_by_name(storage_unit_name)
         self.contents.remove(unit)
         logger.info(f'Deleted storage unit with id {unit.get_id()} from {self.__class__.__name__} with id {self.SUID}.')
 
-    def get_element_by_name(self, element_name):
+    def get_su_by_name(self, element_name):
         """Returns element with given name from contents."""
         
         elements = list(filter(lambda e: e.get_name() == element_name, self.contents))

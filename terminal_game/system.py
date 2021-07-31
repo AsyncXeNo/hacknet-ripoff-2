@@ -45,25 +45,14 @@ class System(object):
         self._init()
 
         self.terminals = []
-        self.main_terminal = self.get_terminal()
+        self.main_terminal = self.get_terminal(self)
 
-    def get_terminal(self):
+    def get_terminal(self, opened_by):
         """Tries to get a terminal, stored in the system files. Raises exception if data is corrupt or file not found."""
 
-        try:
-            system_data = self.root.get_element_by_name('system').get_element_by_name('system.dat')
-        except Exception as e:
-            raise exceptions.OSCorrupted(e.message)
-
-        try:
-            terminal_class = pickle.loads(system_data.get_contents())
-        except Exception as e:
-            raise exceptions.OSCorrupted('The terminal found in system.dat is not safe or corrupted.')
-        
-        if terminal_class != terminal.Terminal:
-            raise exceptions.OSCorrupted('The terminal found in system.dat is not safe or corrupted.')
-
-        term = terminal_class()
+        self.verify_system_integrity()
+        terminal_class = pickle.loads(self.root.get_su_by_name('system').get_su_by_name('system.dat').get_contents())
+        term = terminal_class(self, opened_by)
         self.terminals.append(term)
         return term
 
@@ -102,10 +91,37 @@ class System(object):
         parent.add(fl)
         return fl
 
-    def parse_path(self, path):
+    def parse_path(self, path, relative_to=None):
         """Parses a given path and returns the SU found. Raises SUNotFound exception if no SU found."""
 
-        pass
+        check_type = None
+        path = path.strip()
+        if path in ['', '/']:
+            return self.root
+        path = path.split('/')
+        if path[-1] == '':
+            path.pop()
+            check_type = directory.Directory
+        if path[0] == '':
+            current = self.root
+            path.pop(0)
+        else:
+            if not relative_to:
+                raise exceptions.OSInvalidPath('No relative directory given with relative path.')
+            current = relative_to
+        
+        for part in path:
+            try:
+                current = current.get_su_by_name(part)
+            except exceptions.SUNotFound:
+                raise exceptions.OSInvalidPath('Path not found.')
+            except AttributeError:
+                raise exceptions.OSInvalidPath('Path not found.')
+
+        if check_type:
+            if not isinstance(current, check_type):
+                raise exceptions.OSInvalidPath('Path not found.')
+        return current
 
     def _init(self):
         """Performs all the initialization steps to make the operating system usable."""
@@ -115,17 +131,31 @@ class System(object):
         logger.info(f'Setting root directory for OS with ip {self.IP}.')
 
         try:
-            system_dr = self.root.get_element_by_name('system')
+            system_dr = self.root.get_su_by_name('system')
         except exceptions.SUNotFound:
             system_dr = self.make_dir('system', [], self.root)
 
         try:
-            system_data = system_dr.get_element_by_name('system.dat')
+            system_data = system_dr.get_su_by_name('system.dat')
         except exceptions.SUNotFound:
             system_data = self.make_file('system.dat', "", system_dr)
 
         system_data.set_contents(pickle.dumps(terminal.Terminal))
         logger.info(f'Initialization complete for OS with ip {self.IP}.')
+
+    def verify_system_integrity(self):
+        try:
+            system_data = self.root.get_su_by_name('system').get_su_by_name('system.dat')
+        except Exception as e:
+            raise exceptions.OSCorrupted(e.message)
+
+        try:
+            terminal_class = pickle.loads(system_data.get_contents())
+        except Exception as e:
+            raise exceptions.OSCorrupted('The terminal found in system.dat is not safe or corrupted.')
+        
+        if terminal_class != terminal.Terminal:
+            raise exceptions.OSCorrupted('The terminal found in system.dat is not safe or corrupted.')
 
     def _validate_internet(self, internet):
         """Raises exception if internet is not of valid type."""
