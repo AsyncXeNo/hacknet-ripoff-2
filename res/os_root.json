@@ -1,0 +1,16 @@
+[
+    {
+        "name": "home",
+        "contents": [
+            {
+                "name": "colleges.txt",
+                "contents": "epic college\nepicer college"
+            }
+        ]
+    },
+    {
+        "name": "system",
+        "contents": [
+        ]
+    }
+]
