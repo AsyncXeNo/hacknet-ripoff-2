@@ -21,10 +21,11 @@ class Directory(StorageUnit):
     """
 
     def __init__(self, name: str, contents, parent):
-        """Initialized the directory using a name and a parent.
+        """Initialized the directory using a name, contents and a parent.
         
         Arguments:
             name -- name of the directory.
+            contents -- contents of the file.
             parent -- parent of the directory
         """
 
@@ -60,7 +61,7 @@ class Directory(StorageUnit):
         self._validate_directory_element(storage_unit)
         self.contents.append(storage_unit)
         storage_unit.set_parent(self)
-        logger.info(f'Added storage unit with id {storage_unit.get_id()} to {self.__class__.__name__} with id {self.SUID}.')
+        logger.info(f'Added storage unit with id {storage_unit.get_id()}, name "{storage_unit.get_name()}" and contents {storage_unit.get_contents()} to {self.__class__.__name__} with id {self.SUID}.')
 
     def delete(self, storage_unit_name):
         """Deleted the storage unit with the given name"""
@@ -86,7 +87,7 @@ class Directory(StorageUnit):
         for element in contents:
             self._validate_directory_element(element)
             self.contents.append(element)
-        logger.info(f'Setting contents for {self.__class__.__name__} with id {self.SUID}.')
+        logger.info(f'Setting contents for {self.__class__.__name__} with id {self.SUID} to {[content.get_name() for content in self.contents]}.')
 
     def _validate_contents(self, contents):
         """Raises appropriate exception if directory contents are of invalid type."""

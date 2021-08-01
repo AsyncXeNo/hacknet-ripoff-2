@@ -90,14 +90,19 @@ class System(object):
         logger.info(f'Setting password for OS with ip {self.IP}.')
 
     def make_dir(self, name, contents, parent):
-        """Makes a directory using name and parent and adds it to the parent."""
+        """Makes a directory using name, contents and parent and adds it to the parent."""
 
-        dr = directory.Directory(name, contents, parent)
+        dr = directory.Directory(name, [], parent)
         parent.add(dr)
+        for content in contents:
+            if isinstance(content, directory.Directory):
+                self.make_dir(content.get_name(), content.get_contents(), dr)
+            else:
+                self.make_file(content.get_name(), content.get_contents(), dr)
         return dr
 
     def make_file(self, name, contents, parent):
-        """Makes a file using name and parent and adds it to the parent."""
+        """Makes a file using name, contents and parent and adds it to the parent."""
 
         fl = file.File(name, contents, parent)
         parent.add(fl)

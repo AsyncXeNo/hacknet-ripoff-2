@@ -20,10 +20,11 @@ class File(StorageUnit):
     """
 
     def __init__(self, name: str, contents, parent):
-        """Inits the file using name and a parent.
+        """Inits the file using name, contents and a parent.
         
         Arguments:
             name -- name of the file.
+            contents -- contents of the file.
             parent -- parent of the file (must be a Directory).
         """
         

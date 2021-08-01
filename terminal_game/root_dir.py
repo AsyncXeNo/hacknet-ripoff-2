@@ -14,7 +14,8 @@ class RootDir(Directory):
     """
 
     def __init__(self, contents):
-        """Initialized the root directory."""
+        """Initialized the root directory using contents."""
+        
         super().__init__("", contents, None)
 
     def get_path(self):
