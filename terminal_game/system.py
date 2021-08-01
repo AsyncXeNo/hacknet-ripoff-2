@@ -35,6 +35,7 @@ class System(object):
             username -- string representing the username of the owner.
             password -- string representing the password of the owner.
         """
+
         self.IP = IpGenerator.generate_ip()
         logger.info(f'Initializing OS with IP {self.IP}.')
 
@@ -67,6 +68,11 @@ class System(object):
         term = terminal_class(self, opened_by)
         self.terminals.append(term)
         return term
+
+    def close_terminal(self, terminal):
+        """Closes a given terminal."""
+
+        self.terminals.remove(terminal)
 
     def set_internet(self, internet):
         """Sets the internet for the operating system."""
@@ -124,19 +130,26 @@ class System(object):
             path.pop(0)
         else:
             if not relative_to:
-                raise exceptions.OSInvalidPath('No relative directory given with relative path.')
+                raise Exception('No relative directory given with relative path.')
             current = relative_to
         
         if parent_dir:
             path = path[:-1]
         
         for part in path:
-            try:
-                current = current.get_su_by_name(part)
-            except exceptions.SUNotFound:
-                raise exceptions.OSInvalidPath('Path not found.')
-            except AttributeError:
-                raise exceptions.OSInvalidPath('Path not found.')
+            if part == '..':
+                if current == self.root:
+                    raise exceptions.OSInvalidPath('Cannot go futher back than the root directory.')
+                current = current.get_parent()
+            elif part == '.':
+                continue
+            else:
+                try:
+                    current = current.get_su_by_name(part)
+                except exceptions.SUNotFound:
+                    raise exceptions.OSInvalidPath('Path not found.')
+                except AttributeError:
+                    raise exceptions.OSInvalidPath('Path not found.')
 
         if check_type:
             if not isinstance(current, check_type):
@@ -147,15 +160,15 @@ class System(object):
         try:
             system_data = self.root.get_su_by_name('system').get_su_by_name('system.dat')
         except Exception as e:
-            raise exceptions.OSCorrupted(e.message)
+            raise exceptions.OSCorrupted('system files not found.')
 
         try:
             terminal_class = pickle.loads(system_data.get_contents())
         except Exception as e:
-            raise exceptions.OSCorrupted('The terminal found in system.dat is not safe or corrupted.')
+            raise exceptions.OSCorrupted('system files are either not safe or corrupted.')
         
         if terminal_class != terminal.Terminal:
-            raise exceptions.OSCorrupted('The terminal found in system.dat is not safe or corrupted.')
+            raise exceptions.OSCorrupted('system files are either not safe or corrupted.')
 
     def _validate_internet(self, internet):
         """Raises exception if internet is not of valid type."""

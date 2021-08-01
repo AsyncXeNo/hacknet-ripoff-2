@@ -50,6 +50,7 @@ class File(StorageUnit):
         Arguments:
             old -- The part of the contents you wish to replace.
             new -- What you want to replace it with.
+            count -- (optional) how many of old to replace with new.
         """
 
         if isinstance(self.get_contents(), bytes):
@@ -57,7 +58,7 @@ class File(StorageUnit):
         if not (isinstance(old, str) and isinstance(new, str)):
             raise TypeError('Both arguments need to be of type str.', old, new)
 
-        self.get_contents().replace(old, new, count) if count else self.get_contents().replace(old, new)
+        self.contents = self.contents.replace(old, new, count) if count else self.get_contents().replace(old, new)
         logger.info(f'Replaced "{old}" with "{new}" in the contents of {self.__class__.__name__} with id {self.SUID}.')
 
     def _validate_contents(self, contents):
