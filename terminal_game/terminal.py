@@ -136,9 +136,9 @@ class Terminal(object):
                     return self.response(1, None, 'Cannot put a file as a directory.')
             try:
                 if isinstance(old, File):
-                    new_su = self.os.make_file(new.split('/')[-1], old.get_contents(), new_dir)
+                    self.os.make_file(new.split('/')[-1], old.get_contents(), new_dir)
                 else:
-                    new_su = self.os.make_dir(new.split('/')[-1], old.get_contents(), new_dir)
+                    self.os.make_dir(new.split('/')[-1], old.get_contents(), new_dir)
             except exceptions.SUNameError as e:
                 return self.response(1, None, e.message)
             return self.response(0, None, None)
@@ -147,9 +147,9 @@ class Terminal(object):
                 return self.response(1, None, f'A {new.__class__.__name__} with that name already exists in the destination path.')
             else:
                 if isinstance(old, File):
-                    new_su = self.os.make_file(old.get_name(), old.get_contents(), new)
+                    self.os.make_file(old.get_name(), old.get_contents(), new)
                 else:
-                    new_su = self.os.make_dir(old.get_name(), old.get_contents(), new)
+                    self.os.make_dir(old.get_name(), old.get_contents(), new)
                 return self.response(0, None, None)
 
     def response(self, exit_code, stdout, stderr):

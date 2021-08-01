@@ -93,12 +93,12 @@ class System(object):
         """Makes a directory using name, contents and parent and adds it to the parent."""
 
         dr = directory.Directory(name, [], parent)
-        parent.add(dr)
         for content in contents:
             if isinstance(content, directory.Directory):
                 self.make_dir(content.get_name(), content.get_contents(), dr)
             else:
                 self.make_file(content.get_name(), content.get_contents(), dr)
+        parent.add(dr)
         return dr
 
     def make_file(self, name, contents, parent):
