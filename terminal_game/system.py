@@ -42,7 +42,19 @@ class System(object):
         self.set_username(username)
         self.set_password(password)
 
-        self._init()
+        with open('res/os_root.json', 'r') as f:
+            self.root = Parser.parse_root(json.load(f))
+        logger.info(f'Setting root directory for OS with ip {self.IP}.')
+        try:
+            system_dr = self.root.get_su_by_name('system')
+        except exceptions.SUNotFound:
+            system_dr = self.make_dir('system', [], self.root)
+        try:
+            system_data = system_dr.get_su_by_name('system.dat')
+        except exceptions.SUNotFound:
+            system_data = self.make_file('system.dat', "", system_dr)
+        system_data.set_contents(pickle.dumps(terminal.Terminal))
+        logger.info(f'Initialization complete for OS with ip {self.IP}.')
 
         self.terminals = []
         self.main_terminal = self.get_terminal(self)
@@ -91,7 +103,7 @@ class System(object):
         parent.add(fl)
         return fl
 
-    def parse_path(self, path, relative_to=None):
+    def parse_path(self, path, relative_to=None, parent_dir=False):
         """Parses a given path and returns the SU found. Raises SUNotFound exception if no SU found."""
 
         check_type = None
@@ -110,6 +122,9 @@ class System(object):
                 raise exceptions.OSInvalidPath('No relative directory given with relative path.')
             current = relative_to
         
+        if parent_dir:
+            path = path[:-1]
+        
         for part in path:
             try:
                 current = current.get_su_by_name(part)
@@ -122,26 +137,6 @@ class System(object):
             if not isinstance(current, check_type):
                 raise exceptions.OSInvalidPath('Path not found.')
         return current
-
-    def _init(self):
-        """Performs all the initialization steps to make the operating system usable."""
-
-        with open('res/os_root.json', 'r') as f:
-            self.root = Parser.parse_root(json.load(f))
-        logger.info(f'Setting root directory for OS with ip {self.IP}.')
-
-        try:
-            system_dr = self.root.get_su_by_name('system')
-        except exceptions.SUNotFound:
-            system_dr = self.make_dir('system', [], self.root)
-
-        try:
-            system_data = system_dr.get_su_by_name('system.dat')
-        except exceptions.SUNotFound:
-            system_data = self.make_file('system.dat', "", system_dr)
-
-        system_data.set_contents(pickle.dumps(terminal.Terminal))
-        logger.info(f'Initialization complete for OS with ip {self.IP}.')
 
     def verify_system_integrity(self):
         try:

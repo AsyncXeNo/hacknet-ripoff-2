@@ -44,6 +44,16 @@ class Directory(StorageUnit):
                 bfs += f'{content.get_name()}\n'
         return bfs
 
+    def is_sub_su(self, storage_unit):
+        """Checks if another storage unit is a sub SU of the current directory."""
+
+        for content in self.get_contents():
+            if content == storage_unit:
+                return True
+            if isinstance(content, Directory):
+                return content.is_sub_su(storage_unit)
+        return False
+
     def add(self, storage_unit):
         """Adds an object of type StorageUnit to the contents of the directory."""
         
@@ -68,15 +78,22 @@ class Directory(StorageUnit):
         logger.warning(f'SU with name "{element_name}" not found in {self.__class__.__name__} with id {self.SUID}.')
         raise exceptions.SUNotFound(f'SU with name {element_name} not found.', element_name)
 
+    def set_contents(self, contents):
+        """Sets the self.contents attribute to contents."""
+
+        self._validate_contents(contents)
+        self.contents = []
+        for element in contents:
+            self._validate_directory_element(element)
+            self.contents.append(element)
+        logger.info(f'Setting contents for {self.__class__.__name__} with id {self.SUID}.')
+
     def _validate_contents(self, contents):
         """Raises appropriate exception if directory contents are of invalid type."""
 
         logger.info(f'Validating contents for {self.__class__.__name__} with id {self.SUID}.')
-        super()._validate_contents(contents)
         if not isinstance(contents, list):
             raise exceptions.SUInvalidContents('Directory contents need to be of type list.', contents)
-        for element in contents:
-            self._validate_directory_element(element)
 
     def _validate_directory_element(self, storage_unit):
         """Raises appropriate exception if directory element is not of valid type."""
@@ -85,6 +102,6 @@ class Directory(StorageUnit):
         if not isinstance(storage_unit, StorageUnit):
             raise exceptions.SUDirectoryElementError('Directory element needs to be of type StorageUnit.', storage_unit)
         if storage_unit.get_name() in [unit.get_name() for unit in self.get_contents()]:
-            raise exceptions.SUDirectoryElementError('Another storage unit with this name already exists in this directory.', storage_unit)
+            raise exceptions.SUDirectoryElementError('Another storage unit with this name already exists in this directory.', storage_unit.get_name())
 
         
