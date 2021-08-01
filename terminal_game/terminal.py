@@ -1,3 +1,4 @@
+from terminal_game.root_dir import RootDir
 from terminal_game import directory
 from terminal_game.directory import Directory
 from terminal_game.file import File
@@ -120,7 +121,8 @@ class Terminal(object):
 
         try:
             old = self.os.parse_path(old, relative_to=self.current_dir)
-            logger.warning(len(old.get_contents()))
+            if isinstance(old, RootDir):
+                return self.response(1, None, 'Cannot copy root directory into itself.')
         except exceptions.OSInvalidPath as e:
             return self.response(1, None, e.message)
         

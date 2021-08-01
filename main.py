@@ -10,7 +10,7 @@ def main():
     my_os = web.add_os('asyncxeno', '11111111')
     while True:
         cmd = input('command:')
-        response = my_os.main_terminal.run_command(cmd.split())
+        response = my_os.main_terminal.run_command([arg.strip() for arg in cmd.split()])
         print(f'code {response["exit_code"]}\n{response["stdout"]}\n{response["stderr"]}')
 
 
