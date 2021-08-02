@@ -61,7 +61,7 @@ class Terminal(object):
         """Returns a new line."""
 
         if self.connected_to: return self.connected_to.new_line()
-        name = self.os.username if self.opened_by == self.os else f'{self.opened_by.os.IP}(guest)'
+        name = self.os.username if self.opened_by == self.os else f'{self.opened_by.IP}(guest)'
         return f'{name}:{self.current_dir.get_path()}$ '
 
 
@@ -72,7 +72,7 @@ class Terminal(object):
             self.os.verify_system_integrity()
         except exceptions.OSCorrupted as e:
             if self.opened_by != self.os:
-                self._disconnect()
+                self._disconnect(args)
             return self._response(1, None, e.message)
 
         if self.connected_to:
@@ -90,19 +90,16 @@ class Terminal(object):
     def _connect(self, args):
         if len(args) < 1: return self._response(1, None, 'Too few arguments.\nSyntax: connect <ip>')
 
-        logger.warning(f'attempting to connect to {args[0]}.')
-
         if self.opened_by != self.os:
             return self._response(1, None, 'You are not the root user and hence cannot use this command.')
 
         try:
             os = self.os.internet.get_os_by_ip(args[0])
-            logger.warning(f'found os with ip {args[0]}.')
         except exceptions.OSNotFound:
             return self._response(1, None, f'No system found with IP {args[0]}.')
 
         self.connected_to = os.get_terminal(self.os)
-        logger.warning(f'got terminal of ip {args[0]}.')
+        logger.info(f'connected to {args[0]}')
         return self._response(0, None, None)
 
     def _disconnect(self, _):
@@ -110,6 +107,7 @@ class Terminal(object):
             return self._response(1, None, 'Not connected to any system.')
         self.opened_by.main_terminal.connected_to = None
         self._close()
+        return self._response(0, f'Disconnect from {self.os.IP}.', None)
 
     def _echo(self, args):
         return self._response(0, ' '.join(args), None)
