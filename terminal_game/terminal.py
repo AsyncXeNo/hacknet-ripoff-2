@@ -89,7 +89,7 @@ class Terminal(object):
             return self._response(1, None, 'command not found.')
 
     def _pwd(self, _):
-        return self._response(0, self.current_dir.bfs(), None)
+        return self._response(0, self.current_dir.get_path(), None)
 
     def _connect(self, args):
         if len(args) < 1: return self._response(1, None, 'Too few arguments.\nSyntax: connect <ip>')
