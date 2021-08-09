@@ -18,3 +18,4 @@ LIST OF COMMANDS:
 'rm'
 'write'
 'replace'
+'pwd
