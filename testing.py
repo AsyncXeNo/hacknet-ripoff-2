@@ -5,7 +5,16 @@ from utils.my_logging import get_logger
 from terminal_game import internet
 
 
+def clean():
+    with open('data/generated_ids.json', 'w') as f:
+        json.dump([], f, indent=4)
+    with open('data/generated_ips.json', 'w') as f:
+        json.dump([], f, indent=4)
+
+
 def main():
+    clean()
+    
     web = internet.Internet()
     my_os = web.add_os('asyncxeno', '11111111')
     other_os = web.add_os('testing123', 'testing123')
