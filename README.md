@@ -2,8 +2,8 @@ run testing.py using python3 to get a basic command line interface for using the
 
 LIST OF COMMANDS:
 
-'connect': can't be used while testing
-'disconnect': can't be used while testing
+'connect'
+'disconnect'
 'cd'
 'mv'
 'cp'
