@@ -79,7 +79,7 @@ class StorageUnit(object):
     def get_path(self):
         """Returns the absolute path of the storage unit."""
 
-        return f'{self.get_parent().get_path()}/{self.get_name()}'
+        return f'{self.get_parent().get_path()}{self.get_name()}'
 
     def _validate_name(self, name: str):
         """Raises appropriate exception if a name is not of valid format."""

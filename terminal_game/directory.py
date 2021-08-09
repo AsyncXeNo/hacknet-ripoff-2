@@ -70,6 +70,11 @@ class Directory(StorageUnit):
         self.contents.remove(unit)
         logger.info(f'Deleted storage unit with id {unit.get_id()} from {self.__class__.__name__} with id {self.SUID}.')
 
+    def get_path(self):
+        """Returns the absolute path of directory."""
+
+        return f'{self.get_parent().get_path()}{self.get_name()}/'
+
     def get_su_by_name(self, element_name):
         """Returns element with given name from contents."""
         

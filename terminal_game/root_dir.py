@@ -21,7 +21,7 @@ class RootDir(Directory):
     def get_path(self):
         """Returns path of the root dir"""
 
-        return ''
+        return '/'
 
     def _validate_name(self, name: str):
         """Raises exception if there is a name."""
